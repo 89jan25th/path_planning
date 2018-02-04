@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:../project1_path_planning">
+   </FileRef>
+   <FileRef
       location = "self:project1_path_planning.xcodeproj">
    </FileRef>
 </Workspace>

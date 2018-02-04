@@ -1,6 +1,51 @@
 # CarND-Path-Planning-Project
+
+## rubric points
+
+### The code compiles correctly.
+It compiles correctly.
+
+### The car is able to drive at least 4.32 miles without incident..
+It is able to drive for more than 4.32 miles without incident.
+
+### The car drives according to the speed limit.
+It drives according to the speed limit. The limit is set to 49.5mile/s.
+```
+else if(ref_vel < 49.5){
+ref_vel += .224;
+```
+
+### Max Acceleration and Jerk are not Exceeded.
+The ego vehicle accelerates by a constant decrement or increment. When the front vehicle is less than 5 miles, it slows down by 1.0mile/s.
+When the front vehicle is in 30 miles, it slows down by 0.224mile/s. And lastly, it normally accelerates by 0.224mile/s.
+```
+if(collision_avoidance){
+ref_vel -= 1.0;
+}
+else if(too_close){
+ref_vel -= .224;
+}
+else if(ref_vel < 49.5){
+ref_vel += .224;
+}
+```
+
+### Car does not have collisions.
+It does not cause collisions. But it seldomly has collisions caused by other vehicles abruptly approach the ego vehicle. It is the conclusion after running for 15mins * 5reps.
+
+### The car stays in its lane, except for the time between changing lanes.
+It stays in its lane according to the map_waypoints_x and _y.
+
+### The car is able to change lanes
+It is able to change lanes and the code is in 277  ~ 341 in main.cpp. When the front vehicle is in 30 miles distance, it searches its environment and calculate each target lane's vehicles distance to itself. If the nearest vehicle distance is less than 30 miles, the vehicle just slows down and do not change lanes. If there is a lane with nearest vehicle is farther than 30 miles, it change lanes.
+
+### There is a reflection on how to generate paths.
+Most of the path generation code is from the walkthrough class. It generates evenly spaced points according to map_waypoints, and it is interpolated using spline library. I changed the number of points from 50(instructor example) to 80 because I found it more efficient to change lanes.
+
+
+==== Udacity original contetns ====
 Self-Driving Car Engineer Nanodegree Program
-   
+
 ### Simulator.
 You can download the Term3 Simulator which contains the Path Planning Project from the [releases tab (https://github.com/udacity/self-driving-car-sim/releases).
 
@@ -38,13 +83,13 @@ Here is the data provided from the Simulator to the C++ Program
 #### Previous path data given to the Planner
 
 //Note: Return the previous list but with processed points removed, can be a nice tool to show how far along
-the path has processed since last time. 
+the path has processed since last time.
 
 ["previous_path_x"] The previous list of x points previously given to the simulator
 
 ["previous_path_y"] The previous list of y points previously given to the simulator
 
-#### Previous path's end s and d values 
+#### Previous path's end s and d values
 
 ["end_path_s"] The previous list's last point's frenet s value
 
@@ -52,7 +97,7 @@ the path has processed since last time.
 
 #### Sensor Fusion Data, a list of all other car's attributes on the same side of the road. (No Noise)
 
-["sensor_fusion"] A 2d vector of cars and then that car's [car's unique ID, car's x position in map coordinates, car's y position in map coordinates, car's x velocity in m/s, car's y velocity in m/s, car's s position in frenet coordinates, car's d position in frenet coordinates. 
+["sensor_fusion"] A 2d vector of cars and then that car's [car's unique ID, car's x position in map coordinates, car's y position in map coordinates, car's x velocity in m/s, car's y velocity in m/s, car's s position in frenet coordinates, car's d position in frenet coordinates.
 
 ## Details
 
@@ -69,23 +114,23 @@ A really helpful resource for doing this project and creating smooth trajectorie
 ## Dependencies
 
 * cmake >= 3.5
- * All OSes: [click here for installation instructions](https://cmake.org/install/)
+* All OSes: [click here for installation instructions](https://cmake.org/install/)
 * make >= 4.1
-  * Linux: make is installed by default on most Linux distros
-  * Mac: [install Xcode command line tools to get make](https://developer.apple.com/xcode/features/)
-  * Windows: [Click here for installation instructions](http://gnuwin32.sourceforge.net/packages/make.htm)
+* Linux: make is installed by default on most Linux distros
+* Mac: [install Xcode command line tools to get make](https://developer.apple.com/xcode/features/)
+* Windows: [Click here for installation instructions](http://gnuwin32.sourceforge.net/packages/make.htm)
 * gcc/g++ >= 5.4
-  * Linux: gcc / g++ is installed by default on most Linux distros
-  * Mac: same deal as make - [install Xcode command line tools]((https://developer.apple.com/xcode/features/)
-  * Windows: recommend using [MinGW](http://www.mingw.org/)
+* Linux: gcc / g++ is installed by default on most Linux distros
+* Mac: same deal as make - [install Xcode command line tools]((https://developer.apple.com/xcode/features/)
+* Windows: recommend using [MinGW](http://www.mingw.org/)
 * [uWebSockets](https://github.com/uWebSockets/uWebSockets)
-  * Run either `install-mac.sh` or `install-ubuntu.sh`.
-  * If you install from source, checkout to commit `e94b6e1`, i.e.
-    ```
-    git clone https://github.com/uWebSockets/uWebSockets 
-    cd uWebSockets
-    git checkout e94b6e1
-    ```
+* Run either `install-mac.sh` or `install-ubuntu.sh`.
+* If you install from source, checkout to commit `e94b6e1`, i.e.
+```
+git clone https://github.com/uWebSockets/uWebSockets
+cd uWebSockets
+git checkout e94b6e1
+```
 
 ## Editor Settings
 
