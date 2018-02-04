@@ -43,9 +43,9 @@ It is able to change lanes and the code is in 277  ~ 341 in main.cpp. When the f
 Most of the path generation code is from the walkthrough class. It generates evenly spaced points according to map_waypoints, and it is interpolated using spline library. I changed the number of points from 50(instructor example) to 80 because I found it more efficient to change lanes.
 
 
-Udacity original contetns from below
+==== Udacity original contetns from below ====
 
-Self-Driving Car Engineer Nanodegree Program
+# Self-Driving Car Engineer Nanodegree Program
 
 ### Simulator.
 You can download the Term3 Simulator which contains the Path Planning Project from the [releases tab (https://github.com/udacity/self-driving-car-sim/releases).
